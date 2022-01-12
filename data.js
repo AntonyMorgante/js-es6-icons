@@ -159,12 +159,17 @@ function clearCatalog(){
 	catalog.innerHTML = "";
 }
 
-function filterCatalog(catalog){
+function filterCatalog(){
 		let select = document.getElementById("catalog-filter");
 		let selectedValue = select.options[select.selectedIndex].value;
-		let filteredCatalog = catalog.filter(function(element,index,catalog) {
-			return element == selectedValue;
-		});
+		let filteredCatalog = [];
+		if (selectedValue == `all`){
+			filteredCatalog = catalog;
+		} else{
+			filteredCatalog = catalog.filter(function(element,index,catalog) {
+				return element.type == selectedValue;
+			});
+		}
 		clearCatalog();
 		for (let i=0; i<filteredCatalog.length;i++){
 			createCatalogElement(filteredCatalog[i]);
@@ -175,8 +180,5 @@ for (let i=0; i<catalog.length;i++){
 	createCatalogElement(catalog[i]);
 };
 
-const filters = document.querySelectorAll(".filter-option");
-
-for (let i=0; i<filters.length;i++){
-	filters[i].addEventListener("change",filterCatalog);
-}
+const catalogFilter = document.getElementById("catalog-filter");
+catalogFilter.addEventListener("change", filterCatalog);
