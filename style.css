@@ -1,0 +1,8 @@
+.ms-rounded{
+    border-radius: 20px;
+}
+
+.ms-background{
+    background-color: lightgray;
+    min-height:Calc(100vh - 151px)
+}
